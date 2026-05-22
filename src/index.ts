@@ -1,1 +1,2 @@
-export const hello = (): string => "Hello from LLM Actions!";
+export * from "./IGemini";
+export * from "./client";
