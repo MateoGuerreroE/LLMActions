@@ -2,11 +2,11 @@ import { GeminiInterface } from "./IGemini";
 import { LLMActionClientArgs, LLMActionsInterface } from "./types";
 
 export class LLMActions {
-  private interface: LLMActionsInterface;
+  model: LLMActionsInterface;
   constructor(args: LLMActionClientArgs) {
     switch (args.provider) {
       case "gemini":
-        this.interface = new GeminiInterface({
+        this.model = new GeminiInterface({
           client: args.client,
           model: args.model,
         });
