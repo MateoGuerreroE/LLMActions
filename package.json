@@ -1,6 +1,6 @@
 {
   "name": "llm-actions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LLM Actions package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "prepare": "pnpm run build",
-    "test": ""
+    "test": "vitest",
+    "test:watch": "vitest --watch"
   },
   "keywords": [],
   "author": "MateoGuerreroE",
@@ -18,10 +19,19 @@
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "@google/genai": "^2.6.0",
+    "vitest": "^1.0.0"
   },
   "dependencies": {
-    "@google/genai": "^2.6.0",
     "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "@google/genai": "^2.6.0"
+  },
+  "peerDependenciesMeta": {
+    "@google/genai": {
+      "optional": true
+    }
   }
 }

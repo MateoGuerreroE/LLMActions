@@ -4,6 +4,7 @@ import {
   ExtractActionArgs,
   GenerateTextActionArgs,
   LLMActionsInterface,
+  LLMGeminiProviderArgs,
   ParsingOutputError,
   ProcessActionArgs,
   SummarizeActionArgs,
@@ -12,17 +13,13 @@ import {
 import { SYSTEM_PROMPTS } from "./constants";
 import { z } from "zod";
 
-export type GeminiInterfaceOptions = {
-  model: string;
-} & GoogleGenAIOptions;
-
 export class GeminiInterface implements LLMActionsInterface {
   private llm: GoogleGenAI;
   private model: string;
-  constructor(opts: GeminiInterfaceOptions) {
-    const { model, ...llmOptions } = opts;
-    this.llm = new GoogleGenAI(llmOptions);
-    this.model = opts.model;
+  constructor(opts: Omit<LLMGeminiProviderArgs, "provider">) {
+    const { model, client } = opts;
+    this.llm = client;
+    this.model = model;
   }
 
   async summarize(args: SummarizeActionArgs): Promise<string> {

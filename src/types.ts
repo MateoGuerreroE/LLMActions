@@ -1,17 +1,10 @@
 import z from "zod";
-import { GeminiInterfaceOptions } from "./IGemini";
+import { GoogleGenAI } from "@google/genai";
 
 type BaseTextInputArgs = {
   input: string;
   throwOnError?: boolean;
   defaultOutput?: unknown;
-};
-
-export type LLMProviderOptions = GeminiInterfaceOptions;
-
-export type LLMActionsArgs = {
-  provider: "gemini";
-  providerOptions: LLMProviderOptions;
 };
 
 export type ACTION = "SUMMARIZE" | "EXTRACT" | "PROCESS" | "VALIDATE";
@@ -65,3 +58,12 @@ export class ParsingOutputError extends Error {
 export const BooleanParseSchema = z.object({
   value: z.boolean(),
 });
+
+// REFACTORING ------------
+export type LLMGeminiProviderArgs = {
+  provider: "gemini";
+  client: GoogleGenAI;
+  model: string;
+};
+
+export type LLMActionClientArgs = LLMGeminiProviderArgs;

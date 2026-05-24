@@ -1,12 +1,15 @@
 import { GeminiInterface } from "./IGemini";
-import { LLMActionsArgs } from "./types";
+import { LLMActionClientArgs, LLMActionsInterface } from "./types";
 
 export class LLMActions {
-  model;
-  constructor(args: LLMActionsArgs) {
+  private interface: LLMActionsInterface;
+  constructor(args: LLMActionClientArgs) {
     switch (args.provider) {
       case "gemini":
-        this.model = new GeminiInterface(args.providerOptions);
+        this.interface = new GeminiInterface({
+          client: args.client,
+          model: args.model,
+        });
         break;
       default:
         throw new Error(`Unsupported provider: ${args.provider}`);
